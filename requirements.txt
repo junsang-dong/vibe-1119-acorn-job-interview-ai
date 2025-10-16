@@ -1,0 +1,4 @@
+# GPT API 키 검증 스크립트 의존성 패키지
+openai>=1.0.0
+python-dotenv>=1.0.0
+
