@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+// Vercel 배포 시 동일 오리진 사용, 로컬에서는 localhost:8000
+const API_URL = import.meta.env.VITE_API_URL || (typeof window !== 'undefined' ? '/api' : 'http://localhost:8000/api');
 
 function App() {
   const [topics, setTopics] = useState([]);

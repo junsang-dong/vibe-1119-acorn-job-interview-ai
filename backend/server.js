@@ -3,7 +3,12 @@
  * Express.js 서버로 GPT API를 통해 면접 질문 생성 및 답변 평가
  */
 
-require('dotenv').config({ path: require('path').join(__dirname, '../.env') });
+// Vercel에서는 환경변수를 대시보드에서 설정, 로컬에서는 .env 로드
+if (!process.env.VERCEL) {
+  try {
+    require('dotenv').config({ path: require('path').join(__dirname, '../.env') });
+  } catch (_) {}
+}
 const express = require('express');
 const cors = require('cors');
 const { OpenAI } = require('openai');
@@ -188,10 +193,14 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// 서버 시작
-app.listen(PORT, () => {
-  console.log(`🚀 서버가 포트 ${PORT}에서 실행 중입니다.`);
-  console.log(`📍 http://localhost:${PORT}`);
-  console.log(`✅ API 엔드포인트: http://localhost:${PORT}/api`);
-});
+// 로컬 실행 시에만 서버 시작 (Vercel 서버리스에서는 export만)
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`🚀 서버가 포트 ${PORT}에서 실행 중입니다.`);
+    console.log(`📍 http://localhost:${PORT}`);
+    console.log(`✅ API 엔드포인트: http://localhost:${PORT}/api`);
+  });
+}
+
+module.exports = app;
 
