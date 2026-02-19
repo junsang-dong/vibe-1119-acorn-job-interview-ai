@@ -3,6 +3,12 @@
 GPT API를 활용한 실전 면접 연습 웹 애플리케이션입니다.
 음성 인식 기술로 자연스럽게 답변하고, AI로부터 전문적인 피드백을 받을 수 있습니다.
 
+## 🌐 라이브 데모
+
+**[https://vibe-1119-acorn-job-interview-ai.vercel.app/](https://vibe-1119-acorn-job-interview-ai.vercel.app/)**
+
+Vercel에 배포된 실시간 데모입니다. 바로 체험해 보세요!
+
 ## ✨ 주요 기능
 
 ### 1. 📋 면접 질문 생성
@@ -42,8 +48,10 @@ GPT API를 활용한 실전 면접 연습 웹 애플리케이션입니다.
 
 ```
 vibe-1119-acorn-job-interview-ai/
-├── backend/                 # Express.js 서버
-│   ├── server.js           # API 서버
+├── api/                    # Vercel Serverless Function
+│   └── index.js           # Express API 진입점
+├── backend/                # Express.js 서버
+│   ├── server.js          # API 서버 (로컬/Vercel 공용)
 │   ├── package.json
 │   └── node_modules/
 ├── frontend/               # React 앱
@@ -55,7 +63,9 @@ vibe-1119-acorn-job-interview-ai/
 │   ├── index.html
 │   ├── package.json
 │   └── vite.config.js
-├── .env                    # 환경 변수 (API 키)
+├── vercel.json             # Vercel 배포 설정
+├── package.json            # 루트 빌드 스크립트
+├── .env                    # 환경 변수 (API 키, 로컬 전용)
 ├── .gitignore
 └── README.md
 ```
@@ -104,7 +114,17 @@ npm install
 npm run dev
 ```
 
-브라우저가 자동으로 http://localhost:3000 을 엽니다.
+브라우저가 자동으로 http://localhost:3000 (또는 vite.config.js 설정 포트) 을 엽니다.
+
+## 🚀 배포 (Vercel)
+
+이 프로젝트는 Vercel에 최적화되어 있습니다.
+
+- **프론트엔드**: React + Vite 빌드 → `frontend/dist` 정적 호스팅
+- **백엔드**: Express API → Vercel Serverless Function (`/api/*`)
+- **환경 변수**: Vercel 대시보드에서 `OPENAI_API_KEY` 설정
+
+자세한 배포 방법은 [VERCEL_DEPLOY.md](./VERCEL_DEPLOY.md)를 참고하세요.
 
 ## 📖 사용 방법
 
@@ -217,6 +237,11 @@ const INTERVIEW_TOPICS = {
 ## 👥 기여
 
 피드백과 개선 제안을 환영합니다!
+
+## 🔗 링크
+
+- **라이브 데모**: [https://vibe-1119-acorn-job-interview-ai.vercel.app/](https://vibe-1119-acorn-job-interview-ai.vercel.app/)
+- **GitHub 저장소**: [junsang-dong/vibe-1119-acorn-job-interview-ai](https://github.com/junsang-dong/vibe-1119-acorn-job-interview-ai)
 
 ---
 
